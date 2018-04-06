@@ -1,0 +1,10 @@
+node ('Windows2016') {
+    stage ('Test Pass') {
+        powershell 'Invoke-OperationValidation -testtype simple'
+    }
+        
+    stage ('Test fails'){
+        powershell 'invoke-pester c:\test_gabe.Tests.ps1 -OutputFormat NunitXML -OutputFile report.xml -EnableExit'
+    }
+    
+}
