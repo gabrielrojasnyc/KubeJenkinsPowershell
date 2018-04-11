@@ -8,6 +8,8 @@ USER root
 RUN apt-get update -y
 RUN apt-get install default-jre -y
 RUN apt-get upgrade powershell -y
+RUN pwsh -Command "&{install-module -name pester -force -skipPublisherCheck}"
+
 
 #Files to be copy for demo but this should be downloaded from GIT repo
 COPY test.ps1 /tmp/test.ps1

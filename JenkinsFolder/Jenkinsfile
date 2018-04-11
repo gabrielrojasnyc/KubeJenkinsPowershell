@@ -1,6 +1,6 @@
 node ('Windows2016') {
     stage ('Test Pass') {
-        powershell 'Invoke-OperationValidation -testtype simple'
+        powershell 'Invoke-OperationValidation'
     }
         
     stage ('Test fails'){
