@@ -5,14 +5,14 @@ LABEL version=0.1
 #using root for installation
 USER root
 
-# Install PowerShellCore
+# Install PowerShellCore and Pester
 
 RUN apt-get update -y
 RUN wget https://github.com/PowerShell/PowerShell/releases/download/v6.1.0-preview.1/powershell_6.1.0-preview.1-1.debian.9_amd64.deb
 RUN dpkg -i powershell_6.1.0-preview.1-1.debian.9_amd64.deb 2> /dev/null ; exit 0
 RUN apt-get install -f -y
 RUN rm powershell_6.1.0-preview.1-1.debian.9_amd64.deb
-
+RUN pwsh -Command "&{install-module -name pester -force -skipPublisherCheck}"
 
 #Plug-ins Installation
     #Install Kubernetes pluginin
@@ -33,8 +33,8 @@ RUN /usr/local/bin/install-plugins.sh git:3.8.0
     # Install docker plug-in
 RUN /usr/local/bin/install-plugins.sh docker-plugin:1.1.3
 
-    #Install xunit plug-in
-RUN /usr/local/bin/install-plugins.sh xUnit:1.102
+    #Install nunit plug-in
+RUN /usr/local/bin/install-plugins.sh nunit:0.23
 
     # Misc plug-ins
 RUN /usr/local/bin/install-plugins.sh cloudbees-folder:6.4
